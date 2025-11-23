@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Ublio</title>
+  <script type="module" crossorigin src="/Ublio/assets/cart-Cmr_WCEc.js"></script>
+  <link rel="modulepreload" crossorigin href="/Ublio/assets/main-BwC6oJc1.js">
+  <link rel="stylesheet" crossorigin href="/Ublio/assets/main-BStNSx-R.css">
+</head>
+
+<body>
+    <header class="header header-scrolled">
+        <nav class="container">
+            <div class="nav">
+                <a href="/" class="logo">UBLIO</a>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/src/pages/products.html" class="nav-link">Products</a></li>
+                    <li><a href="/src/pages/about.html" class="nav-link">About</a></li>
+                    <li><a href="/src/pages/contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/src/pages/cart.html" class="icon-btn cart-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main style="margin-top: 100px; min-height: 70vh;">
+        <section class="section">
+            <div class="container">
+                <h1 class="mb-8">Shopping Cart</h1>
+                <div class="cart-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8);">
+                    <div class="cart-items" id="cartItems"></div>
+                    <div class="order-summary card" style="padding: var(--space-6); height: fit-content;">
+                        <h3 class="mb-6">Order Summary</h3>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-4);">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">₹0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-4);">
+                            <span>Shipping:</span>
+                            <span id="shipping">Free</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-4);">
+                            <span>Tax (GST 18%):</span>
+                            <span id="tax">₹0</span>
+                        </div>
+                        <hr
+                            style="margin: var(--space-5) 0; border: none; border-top: 1px solid var(--color-gray-300);">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-6);">
+                            <span>Total:</span>
+                            <span id="total" style="color: var(--color-primary);">₹0</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;"
+                            onclick="window.location.href='/src/pages/checkout.html'" id="checkoutBtn">Proceed to
+                            Checkout</button>
+                        <a href="/src/pages/products.html" class="btn btn-ghost mt-4"
+                            style="width: 100%; text-align: center;">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="padding-top: 0;">
+                <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

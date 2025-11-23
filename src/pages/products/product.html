@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Product Details - Ublio</title>
+    <style>
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-10);
+            margin-top: var(--space-8);
+        }
+
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+        }
+
+        .product-info h1 {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--space-4);
+        }
+
+        .price {
+            font-size: var(--text-5xl);
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            margin: var(--space-6) 0;
+        }
+
+        .add-to-cart-main {
+            width: 100%;
+            margin-top: var(--space-6);
+        }
+
+        .specs-table {
+            width: 100%;
+            margin-top: var(--space-6);
+        }
+
+        .specs-table td {
+            padding: var(--space-3);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            width: 40%;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: var(--space-4);
+        }
+
+        .features-list li {
+            padding: var(--space-2) 0;
+            padding-left: var(--space-6);
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    </style>
+  <script type="module" crossorigin src="/Ublio/assets/product-DRqr7KtM.js"></script>
+  <link rel="modulepreload" crossorigin href="/Ublio/assets/main-BwC6oJc1.js">
+  <link rel="stylesheet" crossorigin href="/Ublio/assets/main-BStNSx-R.css">
+</head>
+
+<body>
+    <header class="header header-scrolled">
+        <nav class="container">
+            <div class="nav">
+                <a href="/" class="logo">UBLIO</a>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/src/pages/products.html" class="nav-link active">Products</a></li>
+                    <li><a href="/src/pages/about.html" class="nav-link">About</a></li>
+                    <li><a href="/src/pages/contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/src/pages/cart.html" class="icon-btn cart-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main style="margin-top: 100px; min-height: 70vh;">
+        <section class="section">
+            <div class="container" id="productContainer">
+                <p>Loading product...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
