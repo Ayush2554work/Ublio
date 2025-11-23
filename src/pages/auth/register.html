@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Ublio</title>
+    <link rel="stylesheet" href="/src/css/main.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 100px auto 50px;
+        }
+
+        .auth-card {
+            background: white;
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-2);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: var(--space-4);
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--radius-md);
+        }
+
+        .form-group input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: var(--space-6);
+            color: var(--color-gray-600);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header header-scrolled">
+        <nav class="container">
+            <div class="nav">
+                <a href="/" class="logo">UBLIO</a>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/src/pages/products.html" class="nav-link">Products</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1 class="text-center">Create Account</h1>
+                <p class="text-center" style="color: var(--color-gray-600); margin-bottom: var(--space-8);">Join the
+                    Ublio family</p>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required placeholder="Create a password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; margin-top: var(--space-4);">Create Account</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="/src/pages/auth/login.html"
+                            style="color: var(--color-primary); font-weight: 600;">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            localStorage.setItem('ublioUser', JSON.stringify({ name, email, loggedIn: true }));
+            alert('Account created successfully!');
+            window.location.href = '/src/pages/account/dashboard.html';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Ublio</title>
+    <link rel="stylesheet" href="/src/css/main.css">
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: var(--space-8);
+            margin-top: 100px;
+            min-height: 70vh;
+        }
+
+        .sidebar {
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-lg);
+            height: fit-content;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: var(--space-3);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
+            transition: var(--transition-base);
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--color-gray-100);
+            color: var(--color-primary);
+        }
+
+        .dashboard-content {
+            background: white;
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header header-scrolled">
+        <nav class="container">
+            <div class="nav">
+                <a href="/" class="logo">UBLIO</a>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/src/pages/products.html" class="nav-link">Products</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/src/pages/cart.html" class="icon-btn cart-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="sidebar">
+                    <h3 style="margin-bottom: var(--space-6);">My Account</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active">Dashboard</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Account Details</a></li>
+                        <li><a href="#" onclick="logout()">Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="dashboard-content">
+                    <h1 class="mb-6">Dashboard</h1>
+                    <div id="userInfo"></div>
+
+                    <h2 class="mt-8 mb-4">Recent Orders</h2>
+                    <p style="color: var(--color-gray-600);">You haven't placed any orders yet.</p>
+                    <a href="/src/pages/products.html" class="btn btn-primary mt-6">Start Shopping</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { updateCartCount } from '/src/js/main.js';
+
+        const user = JSON.parse(localStorage.getItem('ublioUser'));
+        if (!user || !user.loggedIn) {
+            window.location.href = '/src/pages/auth/login.html';
+        } else {
+            document.getElementById('userInfo').innerHTML = `
+        <div class="card" style="padding: var(--space-6); background: var(--color-gray-100);">
+          <p style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Welcome back, <strong>${user.name || user.email}</strong>!</p>
+          <p style="color: var(--color-gray-600);">Email: ${user.email}</p>
+        </div>
+      `;
+        }
+
+        window.logout = function () {
+            localStorage.removeItem('ublioUser');
+            window.location.href = '/';
+        };
+
+        updateCartCount();
+    </script>
+</body>
+
+</html>

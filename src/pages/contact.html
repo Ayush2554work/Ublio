@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ublio Audio</title>
+    <meta name="description" content="Get in touch with Ublio. Contact details, location, and inquiry form.">
+    <link rel="stylesheet" href="/src/css/main.css">
+</head>
+
+<body>
+    <header class="header header-scrolled">
+        <nav class="container">
+            <div class="nav">
+                <a href="/" class="logo">UBLIO</a>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/src/pages/products.html" class="nav-link">Products</a></li>
+                    <li><a href="/src/pages/about.html" class="nav-link">About</a></li>
+                    <li><a href="/src/pages/contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main style="margin-top: 100px;">
+        <section class="section">
+            <div class="container">
+                <h1 class="text-center mb-8">Contact Us</h1>
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); max-width: 1000px; margin: 0 auto;">
+                    <div>
+                        <h2>Get In Touch</h2>
+                        <p style="margin-bottom: var(--space-6); color: var(--color-gray-600);">Have questions? We'd
+                            love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+
+                        <form class="contact-form" id="contactForm"
+                            action="https://formsubmit.co/Ayushkumarwork2554@gmail.com" method="POST">
+                            <input type="hidden" name="_subject" value="New Contact Form Submission - Ublio">
+                            <input type="hidden" name="_captcha" value="false">
+                            <div style="margin-bottom: var(--space-5);">
+                                <label style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Name
+                                    *</label>
+                                <input type="text" name="name" required style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: var(--space-5);">
+                                <label style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Email
+                                    *</label>
+                                <input type="email" name="email" required style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: var(--space-5);">
+                                <label
+                                    style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Phone</label>
+                                <input type="tel" name="phone" style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: var(--space-5);">
+                                <label style="display: block; margin-bottom: var(--space-2); font-weight: 600;">Message
+                                    *</label>
+                                <textarea name="message" required rows="5"
+                                    style="width: 100%; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <h2>Contact Information</h2>
+                        <div class="card" style="padding: var(--space-6); margin-bottom: var(--space-6);">
+                            <h3 style="color: var(--color-primary); margin-bottom: var(--space-4);">📧 Email</h3>
+                            <p><a href="mailto:Ayushkumarwork2554@gmail.com"
+                                    style="color: var(--color-dark);">Ayushkumarwork2554@gmail.com</a></p>
+                        </div>
+
+                        <div class="card" style="padding: var(--space-6); margin-bottom: var(--space-6);">
+                            <h3 style="color: var(--color-primary); margin-bottom: var(--space-4);">📞 Phone</h3>
+                            <p><a href="tel:+919315246678" style="color: var(--color-dark);">+91 9315246678</a></p>
+                            <p
+                                style="font-size: var(--text-sm); color: var(--color-gray-600); margin-top: var(--space-2);">
+                                Mon - Sat: 10:00 AM - 6:00 PM IST</p>
+                        </div>
+
+                        <div class="card" style="padding: var(--space-6); margin-bottom: var(--space-6);">
+                            <h3 style="color: var(--color-primary); margin-bottom: var(--space-4);">📍 Address</h3>
+                            <p>SSPSS Society G1 Office<br>South Delhi<br>India</p>
+                        </div>
+
+                        <div class="card" style="padding: var(--space-6); background: var(--color-accent);">
+                            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-3);">Need Help?</h3>
+                            <p style="font-size: var(--text-sm); margin-bottom: var(--space-4);">Check our FAQ page for
+                                quick answers to common questions.</p>
+                            <a href="/src/pages/faq.html" class="btn btn-outline btn-sm">View FAQ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+
+</html>
