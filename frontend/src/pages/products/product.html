@@ -147,7 +147,7 @@
                 'collaboration': 'collaboration'
             }[product.category] || 'products';
 
-            const imagePath = `/src/assets/images/products/${categoryFolder}/${product.images[0]}`;
+            const imagePath = `/images/products/${categoryFolder}/${product.images[0]}`;
 
             document.getElementById('productContainer').innerHTML = `
         <div class="product-detail-grid">
@@ -208,7 +208,7 @@
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    image: `/src/assets/images/products/${categoryFolder}/${product.images[0]}`,
+                    image: `/images/products/${categoryFolder}/${product.images[0]}`,
                     quantity: 1
                 });
             }
