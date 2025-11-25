@@ -79,103 +79,81 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
-                // Get search query from URL if exists
-                const urlParams = new URLSearchParams(window.location.search);
-                const initialQuery = urlParams.get('q') || '';
-                if (initialQuery) {
-                searchInput.value = initialQuery;
-                performSearch(initialQuery);
-                }
+                <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-                // Search on input
-                searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.trim();
-                if (query.length > 0) {
+    <script type="module">
+        import productsData from '../data/products.json';
+        import { createProductCard, updateCartCount, addToCart } from '../js/main.js';
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+
+        // Get search query from URL if exists
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialQuery = urlParams.get('q') || '';
+        if (initialQuery) {
+            searchInput.value = initialQuery;
+            performSearch(initialQuery);
+        }
+
+        // Search on input
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if (query.length > 0) {
                 performSearch(query);
-                } else {
+            } else {
                 searchResults.innerHTML = '';
                 resultsCount.textContent = '';
                 noResults.style.display = 'none';
-                }
-                });
+            }
+        });
 
-                function performSearch(query) {
-                const lowerQuery = query.toLowerCase();
+        function performSearch(query) {
+            const lowerQuery = query.toLowerCase();
 
-                // Search in product name, category, short description, and features
-                const results = productsData.products.filter(product => {
+            // Search in product name, category, short description, and features
+            const results = productsData.products.filter(product => {
                 const searchableText = [
-                product.name,
-                product.category,
-                product.shortDescription,
-                product.longDescription,
-                ...product.features,
-                ...Object.values(product.specifications)
+                    product.name,
+                    product.category,
+                    product.shortDescription,
+                    product.longDescription,
+                    ...product.features,
+                    ...Object.values(product.specifications)
                 ].join(' ').toLowerCase();
 
                 return searchableText.includes(lowerQuery);
-                });
+            });
 
-                // Display results
-                if (results.length > 0) {
+            // Display results
+            if (results.length > 0) {
                 searchResults.innerHTML = results.map((product, index) => createProductCard(product, index)).join('');
                 resultsCount.textContent = `Found ${results.length} product${results.length !== 1 ? 's' : ''}`;
                 noResults.style.display = 'none';
 
                 // Add event listeners for add to cart buttons
                 document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const productId = btn.dataset.productId;
-                addToCartFromSearch(productId);
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const productId = btn.dataset.productId;
+                        addToCart(productId);
+                    });
                 });
-                });
-                } else {
+            } else {
                 searchResults.innerHTML = '';
                 resultsCount.textContent = '';
                 noResults.style.display = 'block';
-                }
-                }
+            }
+        }
 
-                function addToCartFromSearch(productId) {
-                const product = productsData.products.find(p => p.id === productId);
-                if (!product) return;
-
-                let cart = JSON.parse(localStorage.getItem('ublioCart')) || [];
-                const existing = cart.find(item => item.id === productId);
-
-                const categoryFolder = {
-                'headphones': 'headphones',
-                'studio-headphones': 'studio-headphones',
-                'earbuds': 'earbuds',
-                'speakers': 'speakers',
-                'soundbars': 'soundbars',
-                'home-theatre': 'home-theatre',
-                'turntable': 'turntable',
-                'spectacles': 'spectacles',
-                'collaboration': 'collaboration'
-                }[product.category] || 'products';
-
-                if (existing) {
-                existing.quantity += 1;
-                } else {
-                cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: `/images/products/${categoryFolder}/${product.images[0]}`,
-                quantity: 1
-                });
-                }
-
-                localStorage.setItem('ublioCart', JSON.stringify(cart));
-                updateCartCount();
-                alert(`${product.name} added to cart!`);
-                }
-
-                updateCartCount();
-                </script>
+        updateCartCount();
+    </script>
 </body>
 
 </html>
