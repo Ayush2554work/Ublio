@@ -104,14 +104,15 @@ function initCategories() {
   if (!categoriesGrid) return;
 
   const categories = productsData.categories.filter(cat => cat.id !== 'collaboration');
+  const rootPath = getRootPath();
 
   categoriesGrid.innerHTML = categories.map((category, index) => {
     const productCount = productsData.products.filter(p => p.category === category.id).length;
     const firstProduct = productsData.products.find(p => p.category === category.id);
-    const imagePath = firstProduct ? getImagePath(firstProduct) : '/images/placeholder.jpg';
+    const imagePath = firstProduct ? getImagePath(firstProduct) : `${rootPath}images/placeholder.jpg`;
 
     return `
-      <div class="category-card fade-in" style="animation-delay: ${index * 0.1}s;" onclick="window.location.href='/src/pages/categories/${category.id}.html?category=${category.id}'">
+      <div class="category-card fade-in" style="animation-delay: ${index * 0.1}s;" onclick="window.location.href='${rootPath}src/pages/categories/${category.id}.html?category=${category.id}'">
         <img src="${imagePath}" alt="${category.name}" class="category-image" loading="lazy">
         <div class="category-info">
           <h3 class="category-name">${category.name}</h3>
@@ -151,9 +152,10 @@ function initFeaturedProducts() {
 function createProductCard(product, index = 0) {
   const imagePath = getImagePath(product);
   const badges = product.badges || [];
+  const rootPath = getRootPath();
 
   return `
-    <div class="product-card fade-in" style="animation-delay: ${index * 0.1}s;" onclick="window.location.href='/src/pages/products/product.html?id=${product.id}'">
+    <div class="product-card fade-in" style="animation-delay: ${index * 0.1}s;" onclick="window.location.href='${rootPath}src/pages/products/product.html?id=${product.id}'">
       <div class="product-card-image-wrapper">
         <img src="${imagePath}" alt="${product.name}" class="product-card-image" loading="lazy">
         
@@ -290,6 +292,20 @@ function showCartNotification(productName) {
 }
 
 // === UTILITY FUNCTIONS ===
+function getRootPath() {
+  const path = window.location.pathname;
+  if (path.includes('/src/pages/categories/') ||
+    path.includes('/src/pages/products/') ||
+    path.includes('/src/pages/auth/') ||
+    path.includes('/src/pages/account/')) {
+    return '../../../';
+  }
+  if (path.includes('/src/pages/')) {
+    return '../../';
+  }
+  return './';
+}
+
 function getImagePath(product) {
   if (!product.images || product.images.length === 0) {
     return '/images/placeholder.jpg';
@@ -308,7 +324,12 @@ function getImagePath(product) {
   };
 
   const folder = categoryFolderMap[product.category] || 'products';
-  return `/images/products/${folder}/${product.images[0]}`;
+  // Images are in public folder, so they should be absolute from root? 
+  // Or relative? If we are using relative paths for everything, images might need it too.
+  // But public folder images usually work with absolute paths if served correctly.
+  // Let's try to keep images absolute for now as they are assets, unless user reports broken images.
+  // Actually, let's make them relative too for safety.
+  return `${getRootPath()}images/products/${folder}/${product.images[0]}`;
 }
 
 function getCategoryName(categoryId) {
@@ -321,12 +342,28 @@ function formatPrice(price) {
 }
 
 // === SEARCH FUNCTIONALITY ===
-const searchBtn = document.getElementById('searchBtn');
-if (searchBtn) {
-  searchBtn.addEventListener('click', () => {
-    window.location.href = '/src/pages/search.html';
-  });
+// Moved to initHeader or handled via onclick in HTML if preferred, 
+// but let's keep it here and ensure it attaches correctly.
+function initSearch() {
+  const searchBtn = document.getElementById('searchBtn');
+  if (searchBtn) {
+    // Remove old listeners to avoid duplicates if any
+    const newBtn = searchBtn.cloneNode(true);
+    searchBtn.parentNode.replaceChild(newBtn, searchBtn);
+
+    newBtn.addEventListener('click', () => {
+      window.location.href = `${getRootPath()}src/pages/search.html`;
+    });
+  }
 }
 
+// Update initialization to include search
+const originalInitHeader = initHeader;
+initHeader = function () {
+  originalInitHeader();
+  initSearch();
+};
+
 // === EXPORT FOR OTHER MODULES ===
-export { cart, addToCart, updateCartCount, productsData, getImagePath, getCategoryName, formatPrice, createProductCard };
+export { cart, addToCart, updateCartCount, productsData, getImagePath, getCategoryName, formatPrice, createProductCard, getRootPath };
+
