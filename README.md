@@ -41,12 +41,7 @@ cd frontend
 npm run build
 ```
 
-### Deploy to GitHub Pages
-
-```bash
-cd frontend
-npm run deploy
-```
+### Deploy to ubliolux.shop
 
 ## Backend
 
