@@ -108,7 +108,7 @@ function initCategories() {
   categoriesGrid.innerHTML = categories.map((category, index) => {
     const productCount = productsData.products.filter(p => p.category === category.id).length;
     const firstProduct = productsData.products.find(p => p.category === category.id);
-    const imagePath = firstProduct ? getImagePath(firstProduct) : '/src/assets/images/placeholder.jpg';
+    const imagePath = firstProduct ? getImagePath(firstProduct) : '/images/placeholder.jpg';
 
     return `
       <div class="category-card fade-in" style="animation-delay: ${index * 0.1}s;" onclick="window.location.href='/src/pages/categories/${category.id}.html?category=${category.id}'">
@@ -292,7 +292,7 @@ function showCartNotification(productName) {
 // === UTILITY FUNCTIONS ===
 function getImagePath(product) {
   if (!product.images || product.images.length === 0) {
-    return '/src/assets/images/placeholder.jpg';
+    return '/images/placeholder.jpg';
   }
 
   const categoryFolderMap = {
@@ -308,7 +308,7 @@ function getImagePath(product) {
   };
 
   const folder = categoryFolderMap[product.category] || 'products';
-  return `/src/assets/images/products/${folder}/${product.images[0]}`;
+  return `/images/products/${folder}/${product.images[0]}`;
 }
 
 function getCategoryName(categoryId) {
