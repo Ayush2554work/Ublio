@@ -14,6 +14,7 @@ export default defineConfig({
                 contact: resolve(__dirname, 'src/pages/contact.html'),
                 cart: resolve(__dirname, 'src/pages/cart.html'),
                 checkout: resolve(__dirname, 'src/pages/checkout.html'),
+                search: resolve(__dirname, 'src/pages/search.html'),
                 login: resolve(__dirname, 'src/pages/auth/login.html'),
                 register: resolve(__dirname, 'src/pages/auth/register.html'),
                 dashboard: resolve(__dirname, 'src/pages/account/dashboard.html'),
