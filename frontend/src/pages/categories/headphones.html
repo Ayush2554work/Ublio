@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Products - Ublio</title>
+    <title id="pageTitle">Headphones - Ublio</title>
     <link rel="stylesheet" href="/src/css/main.css">
 </head>
 
@@ -37,7 +37,7 @@
     <main style="margin-top: 100px; min-height: 70vh;">
         <section class="section">
             <div class="container">
-                <h1 class="mb-8" id="categoryTitle">Products</h1>
+                <h1 class="mb-8" id="categoryTitle">Headphones</h1>
                 <div class="grid grid-4" id="productsGrid"></div>
             </div>
         </section>
@@ -49,50 +49,65 @@
                 <p>&copy; 2024 Ublio Audio. All rights reserved.</p>
             </div>
         </div>
+    </footer>
+
+    <script type="module">
+        import productsData from '/src/data/products.json';
+        import { createProductCard, updateCartCount } from '/src/js/main.js';
+
+        // Filter products for headphones category
+        const filteredProducts = productsData.products.filter(p => p.category === 'headphones');
+        const categoryName = 'Headphones';
+
+        document.getElementById('pageTitle').textContent = `${categoryName} - Ublio`;
+        document.getElementById('categoryTitle').textContent = categoryName;
+
+        const container = document.getElementById('productsGrid');
+        container.innerHTML = filteredProducts.map((product, index) => createProductCard(product, index)).join('');
 
         document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const productId = btn.dataset.productId;
-        const product = productsData.products.find(p => p.id === productId);
-        if (!product) return;
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const productId = btn.dataset.productId;
+                const product = productsData.products.find(p => p.id === productId);
+                if (!product) return;
 
-        let cart = JSON.parse(localStorage.getItem('ublioCart')) || [];
-        const existing = cart.find(item => item.id === productId);
+                let cart = JSON.parse(localStorage.getItem('ublioCart')) || [];
+                const existing = cart.find(item => item.id === productId);
 
-        const categoryFolder = {
-        'headphones': 'headphones',
-        'studio-headphones': 'studio-headphones',
-        'earbuds': 'earbuds',
-        'speakers': 'speakers',
-        'soundbars': 'soundbars',
-        'home-theatre': 'home-theatre',
-        'turntable': 'turntable',
-        'spectacles': 'spectacles',
-        'collaboration': 'collaboration'
-        }[product.category] || 'products';
+                const categoryFolder = {
+                    'headphones': 'headphones',
+                    'studio-headphones': 'studio-headphones',
+                    'earbuds': 'earbuds',
+                    'speakers': 'speakers',
+                    'soundbars': 'soundbars',
+                    'home-theatre': 'home-theatre',
+                    'turntable': 'turntable',
+                    'spectacles': 'spectacles',
+                    'collaboration': 'collaboration'
+                }[product.category] || 'products';
 
-        if (existing) {
-        existing.quantity += 1;
-        } else {
-        cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: `/src/assets/images/products/${categoryFolder}/${product.images[0]}`,
-        quantity: 1
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: `/images/products/${categoryFolder}/${product.images[0]}`,
+                        quantity: 1
+                    });
+                }
+
+                localStorage.setItem('ublioCart', JSON.stringify(cart));
+                updateCartCount();
+                alert(`${product.name} added to cart!`);
+            });
         });
-        }
 
-        localStorage.setItem('ublioCart', JSON.stringify(cart));
         updateCartCount();
-        alert(`${product.name} added to cart!`);
-        });
-        });
-
-        updateCartCount();
-        </script>
+    </script>
 </body>
 
 </html>
