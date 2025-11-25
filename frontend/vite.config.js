@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
     root: './',
-    base: process.env.NODE_ENV === 'production' ? '/Ublio/' : '/',
+    base: '/',  // Changed to root for Vercel deployment
     build: {
         outDir: 'dist',
         rollupOptions: {
