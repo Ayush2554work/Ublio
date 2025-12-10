@@ -47,12 +47,6 @@ npm run build
 
 Currently in planning phase. The frontend uses LocalStorage for demonstration.
 
-## Team
-
-- Ayush Kumar (CEO)
-- Mayank Raj (CFO)
-- Pranav Rana (COO)
-- Sarthak Raghuvanshi
 
 ---
 
